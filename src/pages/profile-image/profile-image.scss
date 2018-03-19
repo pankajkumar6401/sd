@@ -1,0 +1,30 @@
+page-profile-image {
+    .editprofilepicture{
+        position: relative;
+    }
+    .editprofilepicture button{
+        bottom: 0rem;
+        position: absolute;
+        background: #f7f7f7a8;
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        max-width: 250px;
+        left: 15.3%;
+        margin:0;
+        z-index: 99;
+    }
+    
+    .editprofilepicture img{
+        margin: 0 auto;
+        width: 100%;
+        border-radius: 50%;
+        max-height: 250px;
+        max-width: 250px;
+        display: block;
+    }
+    
+    .editprofilepicture span{
+        padding: 4px;
+    }
+}

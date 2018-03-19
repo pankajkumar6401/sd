@@ -1,0 +1,12 @@
+{
+    "Username": "फ़ोन डालें",
+    "Password": "पासवर्ड डालें",
+    "Please enter a valid Mobile number.": "कृपया एक वैध मोबाइल नंबर दर्ज करें|",
+    "user": "उपभोक्ता",
+    "signIn": "साइन इन करें",
+    "signUp": "पंजीकरण",
+    "HELLO": "Hello from Ionic",
+    "I18N_EXAMPLE": "i18n example",
+    "STRING_WITH_PARAMS": "String with a parameter: {{value}}",
+    "INNER_CONTENT": "Inner content with a param: {{value}}"
+}

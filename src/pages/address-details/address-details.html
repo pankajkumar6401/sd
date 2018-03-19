@@ -1,0 +1,74 @@
+<!--
+  Generated template for the AddressDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="header">
+    <ion-title>Address Details</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="save()">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding-vertical>
+  <form [formGroup]="addressDetailForm">
+    <ion-list>
+      <ion-item [class.invalid]="!addressDetailForm.controls.address_1.valid && (address_1Changed || submitAttempt)">
+        <ion-label floating>Address Line-1</ion-label>
+        <ion-input #address_1 type="text" formControlName="address_1" (change)="elementChanged(address_1)"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!addressDetailForm.controls.address_1.valid  && (address_1Changed || submitAttempt)">
+              <p>Please enter valid address</p>
+            </ion-item> 
+      <ion-item [class.invalid]="!addressDetailForm.controls.address_2.valid && (address_2Changed || submitAttempt)">
+          <ion-label floating>Address Line-2</ion-label>
+          <ion-input #address_2 type="text" formControlName="address_2" (change)="elementChanged(address_2)"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!addressDetailForm.controls.address_2.valid  && (address_2Changed || submitAttempt)">
+              <p>Please enter valid address</p>
+            </ion-item> 
+      <ion-item [class.invalid]="!addressDetailForm.controls.state.valid && (stateChanged || submitAttempt)">
+          <ion-label floating>State</ion-label>               
+          <ion-select #state formControlName="state" (ionChange)="getDist()">
+              <ion-option *ngFor="let state of states" [value]="state.id">{{state.name}}</ion-option>                   
+          </ion-select>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!addressDetailForm.controls.state.valid  && (stateChanged || submitAttempt)">
+              <p>Please enter state</p>
+            </ion-item> 
+      <ion-item [class.invalid]="!addressDetailForm.controls.district.valid && (districtChanged || submitAttempt)">
+          <ion-label floating>District</ion-label>
+          <ion-select #district formControlName="district" (ionChange)="getTehsil()">
+              <ion-option *ngFor="let district of districts" [value]="district.id">{{district.name}}</ion-option>
+            </ion-select>
+      </ion-item> 
+      <ion-item class="error-message" *ngIf="!addressDetailForm.controls.district.valid  && (districtChanged || submitAttempt)">
+              <p>Please enter district</p>
+            </ion-item> 
+      <ion-item [class.invalid]="!addressDetailForm.controls.tehsil.valid && (tehsilChanged || submitAttempt)">
+          <ion-label floating>Tehsil</ion-label>
+          <ion-select  #tehsil formControlName="tehsil" >
+              <ion-option *ngFor="let tehsil of tehsils" [value]="tehsil.id">{{tehsil.name}}</ion-option>
+            </ion-select>
+      </ion-item> 
+      <ion-item class="error-message" *ngIf="!addressDetailForm.controls.tehsil.valid  && (districtChanged || submitAttempt)">
+              <p>Please enter tehsil</p>
+            </ion-item> 
+      <ion-item [class.invalid]="!addressDetailForm.controls.pincode.valid && (pincodeChanged || submitAttempt)">
+          <ion-label floating>pincode</ion-label>
+          <ion-input #pincode type="text" formControlName="pincode" (change)="elementChanged(pincode)"></ion-input>
+      </ion-item>   
+      <ion-item class="error-message" *ngIf="!addressDetailForm.controls.pincode.valid  && (pincodeChanged || submitAttempt)">
+              <p>Please enter valid pincode</p>
+      </ion-item> 
+      <ion-input #user_id type="hidden" formControlName="user_id" (change)="elementChanged(user_id)"></ion-input>
+      <!--ion-item [class.invalid]="!addressDetailForm.controls.user_id.valid && (user_idChanged || submitAttempt)" class="hidden-field">                
+          
+      </ion-item-->
+    </ion-list>
+  </form>
+</ion-content>

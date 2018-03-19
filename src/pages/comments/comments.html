@@ -1,0 +1,49 @@
+<!--
+  Generated template for the CommentsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar color="header">
+    <ion-title>Comments</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-list class="comment-box" *ngFor="let comment of comments">
+    <ion-item class="comment-list">
+      <ion-avatar item-start>
+        <img *ngIf="comment.photo" [src]="laravel.getProflieImagePath(comment.photo)">
+        <img *ngIf="!comment.photo" src="assets/imgs/profile.png">
+      </ion-avatar>
+      <h3>{{comment.name}}</h3>
+      <p text-wrap>{{comment.message}}</p> 
+      <p item-end class="comment-time">
+          {{comment.comment_time}}
+       </p>             
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <form [formGroup]="addCommentForm">
+    <ion-list class="messgae-input">
+      <ion-item>
+          <ion-avatar item-start>
+              <img *ngIf="!userdetails.photo" src="assets/imgs/profile.png" width="40">
+              <img *ngIf="userdetails.photo" [src]="laravel.getProflieImagePath(userdetails.photo)" width="40">
+          </ion-avatar>
+          <ion-item [class.invalid]="!addCommentForm.controls.message.valid && (messageChanged || submitAttempt)">
+              <ion-input #message type="text" formControlName="message"  placeholder="Write your comment here"></ion-input>
+          </ion-item>
+          <button ion-button item-end type="submit" (click)="save()">
+              <ion-icon name="send"></ion-icon>
+            </button>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-footer>

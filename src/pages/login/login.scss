@@ -1,0 +1,35 @@
+page-login {
+    ion-content{
+        background: -moz-linear-gradient(90deg, rgba(72, 65, 131, 0.27) 0%, #fffcfc 100%); /* ff3.6+ */
+        background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(234,236,237,1)), color-stop(100%, rgba(255,252,252,1))); /* safari4+,chrome */
+        background: -webkit-linear-gradient(90deg, rgba(72, 65, 131, 0.27) 0%, #fffcfc 100%); /* safari5.1+,chrome10+ */
+        background: -o-linear-gradient(90deg, rgba(72, 65, 131, 0.27) 0%, #fffcfc 100%); /* opera 11.10+ */
+        background: -ms-linear-gradient(90deg, rgba(72, 65, 131, 0.27) 0%, #fffcfc 100%); /* ie10+ */
+        background:linear-gradient(90deg, rgba(72, 65, 131, 0.27) 0%, #fffcfc 100%); /* w3c */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeced', endColorstr='#FFFCFC',GradientType=1 ); /* ie6-9 */
+    }
+    .item-md, .item-ios{
+        background: transparent;
+    }
+    .list-ios > .item-block:first-child{
+        border-top: 0;
+    }
+    .list-md > .item-block:first-child{
+        border-top: 0;
+    }
+    .showpassword{
+        position: absolute;
+        font-size: 2.8rem;
+        right: 2.0rem;
+        bottom: 1rem;
+    }
+    .showpassword.active{
+        bottom: 5rem;
+    }
+    .button-clear-md, .button-clear-ios{
+        vertical-align: middle;
+        padding: 0;
+        margin: 0;
+        height: auto;
+    }
+}

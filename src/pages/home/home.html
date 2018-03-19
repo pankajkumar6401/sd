@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar color="header">
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-card  *ngFor="let request of requests; let i = index">
+    <ion-item>
+      <ion-avatar item-start>
+        <img *ngIf="request.profile_image" [src]="laravel.getProflieImagePath(request.profile_image)">
+        <img *ngIf="!request.profile_image" src="assets/imgs/profile.png">
+      </ion-avatar>
+      <h2 title="{{request.user_name}}">{{request.user_name}}</h2>   
+      <h4 title="{{request.tehsil+' '+request.district+' '+request.state}}">{{request.tehsil+' '+request.district+' '+request.state}}</h4>
+      <ion-note item-end class="request-time">
+         {{request.request_time }}
+      </ion-note>
+    </ion-item>
+    <ion-card-content>
+      <p >{{request.request_message}}</p>
+      <ion-slides pager (ionWillChange)="onSlideChangeStart($event)">
+        <ion-slide *ngFor="let img of request.request_image">
+            <img [src]="laravel.getRequestImagePath(img)">
+        </ion-slide>
+      </ion-slides>
+    </ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small (click)="addLike(request.request_id,i)">
+            <ion-icon name="thumbs-up"></ion-icon><br>
+            <div >{{request.like_count}}  </div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small  (click)="addDisLike(request.request_id,i)">
+            <ion-icon name="thumbs-down"></ion-icon><br>
+            <div>{{request.unlike_count}}</div>
+          </button>
+          </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="text"></ion-icon><br>
+            <div (click)="addComments(request['request_id'],request.comments, i)">{{request.comments.length}} Comments</div>
+          </button>
+        </ion-col>        
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content>
+        <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

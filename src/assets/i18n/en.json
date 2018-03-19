@@ -1,0 +1,13 @@
+{
+
+        "Username": "Enter Mobile",
+        "Password": "Enter Password",
+        "enter.valid.email": "Please enter a valid email.",
+        "signIn": "Sign In",
+        "signUp": "Sign Up",
+        "HELLO": "Привет Ionic",
+        "I18N_EXAMPLE": "i18n пример",
+        "STRING_WITH_PARAMS": "Строка с параметром: {{value}}",
+        "INNER_CONTENT": "Inner content с параметром: {{value}}",
+        "Please enter a valid Mobile number.": "Please enter a valid Mobile number."
+}

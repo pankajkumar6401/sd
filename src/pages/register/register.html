@@ -1,0 +1,66 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--ion-header>
+
+  <ion-navbar>
+    <ion-title>register</ion-title>
+  </ion-navbar>
+
+</ion-header-->
+
+
+<ion-content padding>
+  <div text-center style="margin-top: 10%;">
+    <img src="assets/imgs/logo-vishwakarma.jpeg" alt="Surakshadal"/>
+  </div>
+  <form [formGroup]="registerForm" >
+    <ion-list style="position:relative;">
+      <ion-item [class.invalid]="!registerForm.controls.name.valid && (nameChanged || submitAttempt)">
+        <ion-label floating>Fullname</ion-label>
+          <ion-input #name type="text" formControlName="name" (change)="elementChanged(name)" autocapitalize="off"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!registerForm.controls.name.valid  && (nameChanged || submitAttempt)">
+            <p>Please enter your name</p>
+      </ion-item>
+      <ion-item [class.invalid]="!registerForm.controls.name.valid && (fatherNameChanged || submitAttempt)">
+        <ion-label floating>Father's name</ion-label>
+        <ion-input #fatherName type="text" formControlName="fatherName" (change)="elementChanged(fatherName)" autocomplete="off"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!registerForm.controls.fatherName.valid  && (fatherNameChanged || submitAttempt)">
+        <p>Please enter your Father's name.</p>
+      </ion-item>
+      <ion-item [class.invalid]="!registerForm.controls.mobile.valid && (mobileChanged || submitAttempt)">
+          <ion-label floating>Mobile Number</ion-label>
+        <ion-input #mobile type="number" formControlName="mobile" (change)="elementChanged(mobile)" autocapitalize="off"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!registerForm.controls.mobile.valid  && (mobileChanged || submitAttempt)">
+        <p>Please enter a valid Mobile number.</p>
+      </ion-item>
+      <ion-item [class.invalid]="!registerForm.controls.passwordGroup.controls.password.valid && (passwordChanged || submitAttempt)" formGroupName="passwordGroup">
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" #password formControlName="password" (change)="elementChanged(password)" autocapitalize="off"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!registerForm.controls.passwordGroup.controls.password.valid  && (passwordChanged || submitAttempt)">
+        <p>Please enter password.</p>
+      </ion-item>
+      <ion-item [class.invalid]="!registerForm.controls.passwordGroup.controls.confirmPassword.errors?.MatchPassword && (confirmPasswordChanged || submitAttempt)" formGroupName="passwordGroup">
+        <ion-label floating>Confirm Password</ion-label>
+        <ion-input type="password" #confirmPassword formControlName="confirmPassword" (change)="elementChanged(confirmPassword)" autocapitalize="off"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="registerForm.controls.passwordGroup.controls.confirmPassword.errors?.MatchPassword  && (confirmPasswordChanged || submitAttempt)">
+        <p>Confirm Password should match the Password.</p>
+      </ion-item>
+     
+    </ion-list>    
+    <div padding>
+        <button ion-button color="primary" block type="submit" (click)="register()" >Register Now</button>
+    </div>
+  </form> 
+  <div padding text-center>
+    <span>Already have an account?</span> <button ion-button class="link" color="link" clear (click)="goTologinPage()">Login</button> 
+  </div>
+</ion-content>

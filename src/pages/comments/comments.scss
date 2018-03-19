@@ -1,0 +1,19 @@
+page-comments {
+    ion-item.comment-list{
+        padding: 0;
+        .comment-time{
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            font-size: 12px;
+            color: #4d4183;
+        }
+    } 
+    .footer{
+        ion-list{margin:0}
+        .messgae-input ion-label{
+            margin:0;
+        }
+    }
+    
+}

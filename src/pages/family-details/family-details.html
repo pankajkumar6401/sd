@@ -1,0 +1,39 @@
+<!--
+  Generated template for the FamilyDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="header">
+    <ion-title>Family Members</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addFamilyMember()">
+          <ion-icon name="person-add"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding-vertical>
+  <ion-card *ngFor="let member of members">
+      <ion-card-content style="padding:0;">
+          <ion-list >
+              <ion-item-sliding>
+                <ion-item>
+                  <strong>Name</strong> : {{member.name}}<br>
+                  <strong>Relation with</strong> : {{member.relation}}<br>
+                  <strong>Contact</strong> : {{member.contact_no}}
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="primary" (click)="editMember(member)"><ion-icon name="create"></ion-icon> Edit</button>
+                    <button ion-button color="danger" (click)="deleteMember(member.id)"><ion-icon name="trash"></ion-icon> Delete</button>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ion-list>
+      </ion-card-content>
+  </ion-card>
+  
+  <ion-card *ngIf="members.length == 0">
+    <ion-card-content>No Member Found!</ion-card-content>
+  </ion-card>
+</ion-content>

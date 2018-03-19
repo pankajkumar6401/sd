@@ -1,0 +1,92 @@
+<!--
+  Generated template for the PersonalDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="header">
+    <ion-title>Personal Details</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="save()">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding-vertical>
+  <form [formGroup]="profileDetailForm">
+    <ion-list>
+      <ion-item [class.invalid]="!profileDetailForm.controls.name.valid && (nameChanged || submitAttempt)">
+        <ion-label floating>Fullname</ion-label>
+        <ion-input #name type="text" formControlName="name" (change)="elementChanged(name)"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!profileDetailForm.controls.name.valid  && (nameChanged || submitAttempt)">
+        <p>Please enter your name</p>
+      </ion-item>
+      <ion-item [class.invalid]="!profileDetailForm.controls.fatherName.valid && (fatherNameChanged || submitAttempt)">
+        <ion-label floating>Father's name</ion-label>
+        <ion-input #fatherName type="text" formControlName="fatherName" (change)="elementChanged(fatherName)" autocomplete="off"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!profileDetailForm.controls.fatherName.valid && (fatherNameChanged || submitAttempt)">
+        <p>Please enter your Father's name.</p>
+      </ion-item>
+      <ion-item >
+        <ion-label floating>Mother's name</ion-label>
+        <ion-input #motherName type="text" formControlName="motherName" (change)="elementChanged(motherName)" autocomplete="off"></ion-input>
+      </ion-item>
+      <ion-item [class.invalid]="!profileDetailForm.controls.email.valid && (emailChanged || submitAttempt)">
+        <ion-label floating>Email Address</ion-label>
+          <ion-input #email type="text" formControlName="email" (change)="elementChanged(email)" autocapitalize="off"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!profileDetailForm.controls.email.valid  && (emailChanged || submitAttempt)">
+          <p>Please enter your valid email.</p>
+      </ion-item>
+      <ion-item >
+          <ion-label floating>Mobile Number</ion-label>
+          <ion-input #mobile_no [disabled]="true" readonly formControlName="mobile_no" (change)="elementChanged(mobile_no)" ></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!profileDetailForm.controls.mobile_no.valid  && (mobile_noChanged || submitAttempt)">
+          <p>Please enter your valid mobile number.</p>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Phone Number</ion-label>
+        <ion-input #phone type="number" formControlName="phone" (change)="elementChanged(phone)"></ion-input>
+      </ion-item>
+      <ion-item [class.invalid]="!profileDetailForm.controls.dob.valid && (dobChanged || submitAttempt)">
+        <ion-label floating>Date Of Birth</ion-label>
+        <ion-datetime #dob formControlName="dob"  displayFormat="MMM DD YYYY" pickerFormat="MMM DD YYYY" ></ion-datetime>               
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!profileDetailForm.controls.dob.valid  && (dobChanged || submitAttempt)">
+          <p>Please enter Date of Birth.</p>
+      </ion-item>
+      <ion-item [class.invalid]="!profileDetailForm.controls.aadhar.valid && (aadharChanged || submitAttempt)">
+        <ion-label floating>Adhaar Number</ion-label>
+        <ion-input #aadhar type="number" formControlName="aadhar" (change)="elementChanged(aadhar)"></ion-input>
+      </ion-item> 
+      <ion-item class="error-message" *ngIf="!profileDetailForm.controls.aadhar.valid  && (aadharChanged || submitAttempt)">
+        <p>Please enter your valid Aadhar Number</p>
+      </ion-item>
+      <ion-item [class.invalid]="!profileDetailForm.controls.id_type.valid && (id_typeChanged || submitAttempt)">
+        <ion-label floating>ID Proofs Type</ion-label>
+        <ion-select #id_type formControlName="id_type" (change)="elementChanged(id_type)">
+          <ion-option *ngFor="let idproof_type of idproof_types" [value]="idproof_type.id">{{idproof_type.name}}</ion-option>                   
+        </ion-select>
+      </ion-item> 
+      <ion-item class="error-message" *ngIf="!profileDetailForm.controls.id_type.valid  && (id_typeChanged || submitAttempt)">
+        <p>Please enter your Id Type</p>
+      </ion-item>
+      <ion-item [class.invalid]="!profileDetailForm.controls.idnumber.valid && (idnumberChanged || submitAttempt)">
+        <ion-label floating>ID Detail</ion-label>
+        <ion-input #idnumber type="text" formControlName="idnumber" (change)="elementChanged(idnumber)"></ion-input>
+      </ion-item> 
+      <ion-item class="error-message" *ngIf="!profileDetailForm.controls.idnumber.valid  && (idnumberChanged || submitAttempt)">
+        <p>Please enter your Id Detail</p>
+      </ion-item>
+      <ion-item [class.invalid]="!profileDetailForm.controls.user_id.valid && (user_idChanged || submitAttempt)" class="hidden-field">                
+        <ion-input #user_id type="hidden" formControlName="user_id" (change)="elementChanged(user_id)"></ion-input>
+      </ion-item> 
+    </ion-list>
+  </form>
+</ion-content>
