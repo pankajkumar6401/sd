@@ -164,6 +164,7 @@ export class AddRequestPage {
       headers:{'Authorization':token},
       chunkedMode: false,
     }
+
     fileTransfer.upload(fileUrl, this.laravel.uploadRequestImage(), options1)
     .then((data)=> {
       this.loading.dismiss();
@@ -202,6 +203,11 @@ export class AddRequestPage {
         res => {
           if(res.success){
             this.loading.dismiss().then(() => {
+              this.addRequestForm.controls.type.setValue('');
+              this.addRequestForm.controls.message.setValue('');
+              this.originalFile = '';
+              this.requestimg = '';
+              this.submitAttempt = this.typeChanged = this.messageChanged = false;
               this.navCtrl.parent.select(0);
             });
           }else{

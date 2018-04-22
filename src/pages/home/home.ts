@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, ModalController, App } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { LaravelProvider } from '../../providers/laravel/laravel';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the HomePage page.
@@ -33,11 +34,17 @@ export class HomePage {
     public loadingCtrl: LoadingController,
     public toast: ToastController,
     public modalCtrl: ModalController ,
+    private storage: Storage,
+    public appCtrl: App,
   ) {
     
   }
 
   ionViewDidLoad() {
+    //this.getData();
+  }
+
+  ionViewDidEnter(){
     this.getData();
   }
 
@@ -96,7 +103,10 @@ export class HomePage {
           this.sychedData = true;
           if(err.error.hasOwnProperty('message')){
             if(err.error.message == 'Unauthenticated.'){
-              errorMsg = '';
+              this.storage.remove('surakshadal_userTokenInfo').then(()=>{
+                this.laravel.removeToken();  
+                this.appCtrl.getRootNav().push('LoginPage');
+              });
             }else{
               errorMsg = err.error.message;
             }

@@ -164,6 +164,6 @@ interface RegisterInterface {
 
   };
 }
-interface UserDetailResponse {
+/*interface UserDetailResponse {
   data: string[];
-}
+}*/

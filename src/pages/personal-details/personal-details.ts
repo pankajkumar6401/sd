@@ -99,7 +99,7 @@ export class PersonalDetailsPage {
       // delete(profileData.phone)
       let headers = new Headers();
       let token:string = this.laravel.getToken();
-      console.log(token);
+
       headers.append('Authorization', token);
       this.loading = this.loadingCtrl.create({
         content: 'Please wait...'

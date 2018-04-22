@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, ViewController, ActionSheetController } from 'ionic-angular';
 import { LaravelProvider } from '../../providers/laravel/laravel';
@@ -33,7 +34,8 @@ export class ProfileImagePage {
     public toast: ToastController,
     public viewCtrl: ViewController,
     public httpClient: HttpClient,
-    private transfer: FileTransfer
+    private transfer: FileTransfer,
+    private storage: Storage
   ) {
     this.user_detail= navParams.get('profileimageData');
   }
@@ -110,23 +112,53 @@ export class ProfileImagePage {
     const fileTransfer: FileTransferObject  = this.transfer.create();
     let options1: FileUploadOptions = {
       fileKey: 'profileimage',
-      fileName: 'request.jpg',
+      fileName: 'profile.jpg',
       headers:{'Authorization':token},
       chunkedMode: false,
     }
-    console.log(fileUrl); 
+ 
     fileTransfer.upload(fileUrl, this.laravel.uploadProfileImage(), options1)
     .then((data)=> {
-      this.loading.dismiss();
-      let response = JSON.parse(data.response);
-      if(response.success){
-        this.user_detail.photo = response.filename;
-      }else{
-        this.toast.create({
-          message: 'Sorry we are experiencing some issue while uploading image. Please contact your app developer',
-          duration:3000
-        }).present();  
-      }
+      this.loading.dismiss().then(()=>{
+        let response = JSON.parse(data.response);
+        if(response.success){
+          console.log(JSON.stringify(response));
+          this.user_detail.photo = response.profileimage;
+          this.httpClient.get<any>(this.laravel.getUserDetailApi())
+          .subscribe(
+            res => {
+              this.storage.set('surakshadal_userDetails',res).then(
+                res => {
+                  this.navCtrl.setRoot('ProfilePage');
+                  this.toast.create({
+                    message: 'Profile Image has been Updated' ,
+                    duration:3000
+                  }).present();
+                },
+                err => {
+                  this.toast.create({
+                    message: 'Something went wrong! While Saving User\'s Details Getting. Please contact your app developers',
+                    duration: 3000
+                  }).present();
+                }
+              );
+            },
+            err => {
+              this.loading.dismiss();
+              this.toast.create({
+                message: 'Something went wrong! While Getting User\'s Details. Please contact your app developers',
+                duration: 3000
+              }).present();
+            }
+          );
+        }else{
+          this.toast.create({
+            message: 'Sorry we are experiencing some issue while uploading image. Please contact your app developer',
+            duration:3000
+          }).present();  
+        }
+      });
+      
     },(err) => {
       this.loading.dismiss();
       this.toast.create({

@@ -59,7 +59,7 @@ export class LaravelProvider {
   }
 
   uploadRequestImage(){
-    return this.getUrl() +'api/uploadRequestImage';
+    return this.getUrl() +'api/requestimage';
   }
 
   getAddRequestApi(){
@@ -67,7 +67,7 @@ export class LaravelProvider {
   }
 
   getLogoutApi(){
-    return this.getUrl() + 'api/logout';
+    return this.getUrl() + 'api/applogout';
   }
 
   getUpdatePersonalDetail(){

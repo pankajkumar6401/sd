@@ -28,7 +28,6 @@ export class MyApp {
       });
       this.loading.present();
       this.storage.get('surakshadal_userTokenInfo').then((val) => {
-        console.log(val);
         if(val){
           this.loading.dismiss();
           this.laravel.setToken(val);

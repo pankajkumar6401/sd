@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController, ToastController, AlertController } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams, ModalController, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { LaravelProvider } from '../../providers/laravel/laravel';
 import { Storage } from '@ionic/storage';
@@ -35,6 +35,7 @@ export class ProfilePage {
     public modalCtrl: ModalController,
     private storage: Storage,
     private alertCtrl: AlertController,
+    public appCtrl: App,
   ) {
   }
 
@@ -96,27 +97,22 @@ export class ProfilePage {
         {
           text: 'Log Out',
           handler: () => {
+            this.loading = this.loadingCtrl.create({
+              content: 'Please wait...'
+            });
+            this.loading.present();
             this.httpClient.post<any>(this.laravel.getLogoutApi(),{}).subscribe(
               res => {
-                this.loading.dismiss().then(()=>{
+                this.loading.dismiss().then(()=>{ 
                   if(res.success){
-                    this.storage.remove('userTokenInfo').then(()=>{
+                    this.storage.remove('surakshadal_userTokenInfo').then(()=>{
                       this.laravel.removeToken();
-                      this.toast.create({
-                        message: 'You are successfully logout!',
-                        duration: 3000
-                      }).present();  
-                      this.navCtrl.setRoot('LoginPage');
+                      this.appCtrl.getRootNav().push('LoginPage');
                     });
                   }else{
-                    let errorMsg = 'Something went wrong. Please contact your app developer';
-                    this.storage.remove('userTokenInfo').then(()=>{
+                    this.storage.remove('surakshadal_userTokenInfo').then(()=>{
                       this.laravel.removeToken();
-                      this.navCtrl.setRoot('LoginPage');
-                      this.toast.create({
-                        message: (res.hasOwnProperty('msg')) ? res.msg : errorMsg,
-                        duration: 3000
-                      }).present();  
+                      this.appCtrl.getRootNav().push('LoginPage');
                     });
                   }
                 });
