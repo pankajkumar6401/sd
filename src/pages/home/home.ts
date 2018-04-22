@@ -94,10 +94,19 @@ export class HomePage {
             infiniteScroll.complete();
           }
           this.sychedData = true;
-          this.toast.create({
-            message: errorMsg ,
-            duration:3000
-          }).present();
+          if(err.error.hasOwnProperty('message')){
+            if(err.error.message == 'Unauthenticated.'){
+              errorMsg = '';
+            }else{
+              errorMsg = err.error.message;
+            }
+          }
+          if(errorMsg != ''){
+            this.toast.create({
+              message: errorMsg ,
+              duration:3000
+            }).present();
+          }
         });
       }
     )

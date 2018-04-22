@@ -102,14 +102,22 @@ export class ProfilePage {
                   if(res.success){
                     this.storage.remove('userTokenInfo').then(()=>{
                       this.laravel.removeToken();
+                      this.toast.create({
+                        message: 'You are successfully logout!',
+                        duration: 3000
+                      }).present();  
                       this.navCtrl.setRoot('LoginPage');
                     });
                   }else{
                     let errorMsg = 'Something went wrong. Please contact your app developer';
-                    this.toast.create({
-                      message: (res.hasOwnProperty('msg')) ? res.msg.join():errorMsg,
-                      duration: 3000
-                    }).present();  
+                    this.storage.remove('userTokenInfo').then(()=>{
+                      this.laravel.removeToken();
+                      this.navCtrl.setRoot('LoginPage');
+                      this.toast.create({
+                        message: (res.hasOwnProperty('msg')) ? res.msg : errorMsg,
+                        duration: 3000
+                      }).present();  
+                    });
                   }
                 });
               },

@@ -114,8 +114,8 @@ export class LoginPage {
         (err: HttpErrorResponse)=>{
           this.loading.dismiss();
           let errorMsg = 'Something went wrong. Please contact your app developer';
-          if(err.error instanceof Error){
-            errorMsg = err.error.message;
+          if(err.error.hasOwnProperty('message')){
+            errorMsg = err.error.message; 
           }    
           this.toast.create({
             message: errorMsg ,

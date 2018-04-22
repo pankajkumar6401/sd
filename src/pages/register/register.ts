@@ -62,7 +62,7 @@ export class RegisterPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
+    
   }
 
   register(){
@@ -89,10 +89,10 @@ export class RegisterPage {
             .then(
               data => {
                 this.laravel.setToken(res.token.token_type+' '+res.token.access_token);
-                this.httpClient.get<UserDetailResponse>(this.laravel.getUserDetailApi())
+                this.httpClient.get<any>(this.laravel.getUserDetailApi())
                 .subscribe(
                   res => {
-                    this.storage.set('surakshadal_userDetails',res.data).then(
+                    this.storage.set('surakshadal_userDetails',res).then(
                       res => {
                         this.loading.dismiss();
                         this.navCtrl.setRoot(TabsPage);
@@ -139,8 +139,8 @@ export class RegisterPage {
         (err:HttpErrorResponse) => {
           this.loading.dismiss().then(()=>{
             let errorMsg = 'Something went wrong. Please contact your app developer';
-            if(err.error instanceof Error){
-              errorMsg = err.error.message;
+            if(err.hasOwnProperty('error')){
+              errorMsg = err.error.error.join();
             }
             this.toast.create({
               message: errorMsg ,
