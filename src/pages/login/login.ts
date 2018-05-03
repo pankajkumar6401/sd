@@ -127,7 +127,11 @@ export class LoginPage {
   }
 
   goToRegister(){
-    this.navCtrl.push('RegisterPage')
+    this.navCtrl.push('RegisterPage');
+  }
+
+  forgotPassword(){ 
+    this.navCtrl.push('ForgotPasswordPage');
   }
 
   ionViewDidLoad() {

@@ -128,4 +128,8 @@ export class LaravelProvider {
     return this.getUrl() + 'api/change/password';
   }
 
+  getForgotPasswordApi(){
+    return this.getUrl() + 'ap/forgotPassword';
+  }
+
 }

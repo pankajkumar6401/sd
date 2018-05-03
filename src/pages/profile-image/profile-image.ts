@@ -122,7 +122,6 @@ export class ProfileImagePage {
       this.loading.dismiss().then(()=>{
         let response = JSON.parse(data.response);
         if(response.success){
-          console.log(JSON.stringify(response));
           this.user_detail.photo = response.profileimage;
           this.httpClient.get<any>(this.laravel.getUserDetailApi())
           .subscribe(
