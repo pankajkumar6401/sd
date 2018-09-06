@@ -129,7 +129,7 @@ export class LaravelProvider {
   }
 
   getForgotPasswordApi(){
-    return this.getUrl() + 'ap/forgotPassword';
+    return this.getUrl() + 'api/forgotPassword';
   }
 
 }

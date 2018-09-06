@@ -57,10 +57,20 @@ export class ForgotPasswordPage {
       this.httpClient.post<any>(this.laravel.getForgotPasswordApi(),data)
       .subscribe(
         res => {
-
+          this.forgotPasswordForm.controls.mobile.setValue('');
+          this.navCtrl.pop();
+          this.loading.dismiss();
+          this.toast.create({
+            message: 'Your request has been received and You will receive password shortly!',
+            duration: 3000
+          }).present();
         },
         (err:HttpErrorResponse) => {
-          
+          this.loading.dismiss();
+              this.toast.create({
+                message: 'Something went wrong! While reseting your password. Please contact your app support team!',
+                duration: 3000
+              }).present();
         }
       )
     }
